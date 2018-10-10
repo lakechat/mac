@@ -72,7 +72,7 @@ public class HttpClientCalls {
 
     }
 
-    private static String httpPost3(String ticketBody, String url) {
+    public static String httpPost3(String ticketBody, String url) {
 	HttpPost postRequest = new HttpPost(url);
 	String responseString = null;
 	try {
@@ -81,7 +81,7 @@ public class HttpClientCalls {
 	    postRequest = new HttpPost(url);
 
 	    postRequest.setHeader("Accept", "application/json");
-
+	    postRequest.addHeader("Authorization","Basic YWRtaW46Rml4U3RyZWFtMTIzIQ==");
 	    postRequest.addHeader("content-type", "application/json");
 	    postRequest.setEntity(httpEntity);
 	    {
@@ -104,7 +104,7 @@ public class HttpClientCalls {
 
     }
 
-    private static String httpGet(String url, String sessionId) {
+    public static String httpGet(String url, String sessionId,CredentialsProvider  credsProvider) {
 	HttpGet getRequest = new HttpGet(url);
 	String responseString = null;
 
@@ -112,17 +112,18 @@ public class HttpClientCalls {
 	    CloseableHttpResponse response = null;
 	    getRequest.addHeader("Accept", "application/json");
 	    getRequest.addHeader("content-type", "application/json");
+	    getRequest.addHeader("Authorization","Basic YWRtaW46Rml4U3RyZWFtMTIzIQ==");
 
-	    CookieStore cookieStore = new BasicCookieStore();
-	    BasicClientCookie cookie = new BasicClientCookie("session_id", sessionId);
-	    cookie.setDomain("fs-arista-cvp");
-	    cookie.setPath("/");
-	    cookieStore.addCookie(cookie);
+	    //CookieStore cookieStore = new BasicCookieStore();
+	    //BasicClientCookie cookie = new BasicClientCookie("session_id", sessionId);
+	    //cookie.setDomain("fs-arista-cvp");
+	   // cookie.setPath("/");
+	   // cookieStore.addCookie(cookie);
 
 	    HttpClientContext context = HttpClientContext.create();
-	    context.setCookieStore(cookieStore);
+	   // context.setCookieStore(cookieStore);
 
-	    CloseableHttpClient client = getCloseableHttpClient(null, null);
+	    CloseableHttpClient client = getCloseableHttpClient(credsProvider, null);
 
 	    response = client.execute(getRequest, context);
 	    int responseCode = response.getStatusLine().getStatusCode();

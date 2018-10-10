@@ -10,6 +10,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 
+
 public class CodecUtil {
     
 
@@ -122,18 +123,30 @@ public class CodecUtil {
 		return result;
 	}
 	
+	public static String encryptPassword(String input) {
+	        if (null != input && !input.isEmpty()) {
+	            try {
+	                return CodecUtil.encode(CodecUtil.compress(input));
+	            } catch (IOException e) {
+	               
+	            }
+	        }
+	        return input;
+	    }
+	
 	public static void main(String[] args) throws IOException, DataFormatException {
 		
 
-		String finalString3 = CodecUtil.decompress(CodecUtil
-				.decode("eJx9VsFy4jgQvecrUj6vKRsbA7klGWaXrSRDAdnda1tqgyqypJFkZjNT+feVASeMpNkT0K8lPfV73eLH1fV1skegqJPrm+sf7qcLULLqas7Mfsta7OOi4/y3AbvXCBYHKJ8U2XSWFcX0PWHdiSUNlv0p60h0q9luh3r7qsKDIunLlRcSBNf4tUNjg+zW7CLbGmbxlJrUWDWYT6t0TKtJWmb1PIW6atJ84urhYrPJmN48b5LzSql3x2UTUlO3YJxmJS3SMs/zdDapi3RWVJRMmjKHsrn5vPxns10vbh8Tt/it3yFRWipzUeUDCiq1T1pS5F5McbCN1O0vwpFLHlAbJoVfPjwwMly+rMZFVcIkrXBK05JmdTrPZtN0NgOsYU7qsiyGm3NJwEb3e4gjoH7XslNh/sA1uf/yuHreLpIPaNPVMblQM+BPXVujX6rmK/XP7UMPzFj/YNkCE08QmHkvjR3CiXUmcjwGSsz8xbTtwFfDuZ/soeYYOagT/4e2IMB53fjsmCHSKYZ0qWLkL+BbSo9VSPLpeJRXo/GonCc/7d6isEu/8Aq0C/vnnqJ/nEvgo4R3xoZklcbDpwsfBfZaS+5X+XRQkH9oI4o0EPj8BVHdcnbAjQXb+YREuIeVFvhGAfEBjb0PmNjFQBPbncsdI8DvXAe8PKDY2X2ozkvEtrve/k/oaynQrqT0HUXA0WH21TeTQXr/ayh2BwoW1kg7EulJoxCDEQmia4DYTgfdBRSU0z9QTTn+ofTayRMpgxt5PZlABo5g/Nxv33zGvBN/B0GtfH9oYPQBD8HYpEwjsTK8AkVDNFORGrFjh6HxbVD3+m/Yd5+zOM4l2Rxxf5F5bV2nRLr9xdzLTvhVUVLbKHBWIjoDTW+CZxMI2xvhs3sb3EMdpfyluYtRbjRiFOhZx0a60sRGjv+YRSuIFIbI9tP7VOvBbOiE/q/FhSzvb2d/n4uns0WrGbl4THvtmn8fw7ADFnaPWpx68SPsADwDmY8cPUoOC63laQBmozPDn/C7V3sam8UoH8+rfF7Ox9NFnl1kvl35306fb4PFXd/0OzTADfa3vXr7DyRLpPI="));
+//		String finalString3 = CodecUtil.decompress(CodecUtil
+//				.decode("eJx9VsFy4jgQvecrUj6vKRsbA7klGWaXrSRDAdnda1tqgyqypJFkZjNT+feVASeMpNkT0K8lPfV73eLH1fV1skegqJPrm+sf7qcLULLqas7Mfsta7OOi4/y3AbvXCBYHKJ8U2XSWFcX0PWHdiSUNlv0p60h0q9luh3r7qsKDIunLlRcSBNf4tUNjg+zW7CLbGmbxlJrUWDWYT6t0TKtJWmb1PIW6atJ84urhYrPJmN48b5LzSql3x2UTUlO3YJxmJS3SMs/zdDapi3RWVJRMmjKHsrn5vPxns10vbh8Tt/it3yFRWipzUeUDCiq1T1pS5F5McbCN1O0vwpFLHlAbJoVfPjwwMly+rMZFVcIkrXBK05JmdTrPZtN0NgOsYU7qsiyGm3NJwEb3e4gjoH7XslNh/sA1uf/yuHreLpIPaNPVMblQM+BPXVujX6rmK/XP7UMPzFj/YNkCE08QmHkvjR3CiXUmcjwGSsz8xbTtwFfDuZ/soeYYOagT/4e2IMB53fjsmCHSKYZ0qWLkL+BbSo9VSPLpeJRXo/GonCc/7d6isEu/8Aq0C/vnnqJ/nEvgo4R3xoZklcbDpwsfBfZaS+5X+XRQkH9oI4o0EPj8BVHdcnbAjQXb+YREuIeVFvhGAfEBjb0PmNjFQBPbncsdI8DvXAe8PKDY2X2ozkvEtrve/k/oaynQrqT0HUXA0WH21TeTQXr/ayh2BwoW1kg7EulJoxCDEQmia4DYTgfdBRSU0z9QTTn+ofTayRMpgxt5PZlABo5g/Nxv33zGvBN/B0GtfH9oYPQBD8HYpEwjsTK8AkVDNFORGrFjh6HxbVD3+m/Yd5+zOM4l2Rxxf5F5bV2nRLr9xdzLTvhVUVLbKHBWIjoDTW+CZxMI2xvhs3sb3EMdpfyluYtRbjRiFOhZx0a60sRGjv+YRSuIFIbI9tP7VOvBbOiE/q/FhSzvb2d/n4uns0WrGbl4THvtmn8fw7ADFnaPWpx68SPsADwDmY8cPUoOC63laQBmozPDn/C7V3sam8UoH8+rfF7Ox9NFnl1kvl35306fb4PFXd/0OzTADfa3vXr7DyRLpPI="));
+//		
+		String pass = "admin:FixStream123!";
+		String finalString3 = encode(pass.getBytes());
 		System.out.println(finalString3);
+		String s = decompress(Base64.getDecoder().decode("eJxzy6wILilKTcw1NDJWBAAhnARL"));
+		System.out.println(s);
 		
-		List<String> test = new ArrayList<>();
 		
-		String result = getCSId(test);
-		//System.out.println(result);
-
 	}
 
 
