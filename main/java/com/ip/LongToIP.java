@@ -18,7 +18,7 @@ public class LongToIP {
 //	    System.out.println(tmp[i]);
 	
 	
-	System.out.println(Integer.toBinaryString(-1));
+	System.out.println(Integer.toBinaryString(-2));
 	System.out.println(Integer.toBinaryString(1));
 //
    }
